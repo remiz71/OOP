@@ -1,5 +1,8 @@
 #include <iostream>
 using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
 #define tab "\t"
 
 class Point
@@ -23,7 +26,15 @@ public:
 	{
 		this->y = y;
 	}
+	double Length(double x, double y)
+	{
+		double l;
+		l = sqrt(x * x + y * y);
+		return l;
+	}
+	
 };
+double A_length_B(Point A, Point B);
 
 /*
 Создавая структуру или класс мы создаем тип данных.
@@ -105,11 +116,15 @@ Operator=
 В классе может быть сколько угодно конструкторов
 Деструктор не может прнимать параметры, его нельзя перегрузить, поэтому в классе может быть только один деструктор
 */
-	Point A; // Будет уничтожена при завершении ф-ции main
-	A.set_x(3);
-	A.set_y(2);
-	cout << A.get_x() << tab << A.get_y() << endl;
-	
+	Point A;
+	Point B;
+	A.set_x(2);
+	A.set_y(3);
+	B.set_x(4);
+	B.set_y(2);
+	cout << "Расстояние до точки А: " << A.Length(A.get_x(), A.get_y()) << endl;
+	cout << "Расстояние между точками А и В: " << A_length_B(A, B) << endl;
+
 	for (int i = 0; i < 5; i++) //i-локальный обьект для цикла for
 	{
 		cout << i << tab;
@@ -118,4 +133,11 @@ Operator=
 
 	
 
+}
+
+double A_length_B(Point A, Point B)
+{
+	double Len;
+	Len = sqrt((A.get_x() - B.get_x()) * (A.get_x() - B.get_x()) + (A.get_y() - B.get_y()) * (A.get_y() - B.get_y()));
+	return Len;
 }
