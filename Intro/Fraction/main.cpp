@@ -97,6 +97,18 @@ public:
 		return old; //CopyConstructor
 
 	}
+	Fraction& operator--() // Prefix increment
+	{
+		integer--;
+		return *this;
+	}
+	Fraction operator--(int) //PostFix increment
+	{
+		Fraction old = *this; // save the old value CopyConstructor
+		integer--;
+		return old; //CopyConstructor
+
+	}
 
 
 	//  methods
@@ -144,6 +156,41 @@ Fraction operator*(Fraction left, Fraction right)
 
 	);
 }
+	Fraction operator+(Fraction left, Fraction right)
+	{
+		left.to_improper();
+		right.to_improper();
+		if (left.get_denominator() == right.get_denominator())
+		return Fraction
+		(
+			left.get_numerator() + right.get_numerator(),
+			left.get_denominator()
+
+		);
+		return Fraction
+		(
+			(left.get_numerator() * right.get_denominator()) + (right.get_numerator() * left.get_denominator()),
+			left.get_denominator() * right.get_denominator()
+		);
+	}
+	Fraction operator-(Fraction left, Fraction right)
+	{
+		left.to_improper();
+		right.to_improper();
+		if (left.get_denominator() == right.get_denominator())
+		return Fraction
+		(
+			left.get_numerator() - right.get_numerator(),
+			left.get_denominator()
+
+		);
+		return Fraction
+		(
+			(left.get_numerator() * right.get_denominator()) - (right.get_numerator() * left.get_denominator()),
+			left.get_denominator() * right.get_denominator()
+		);
+	}
+
 
 
 //#define CONSTRUCTORS_CHECK
@@ -173,7 +220,7 @@ void main()
 #endif // CONSTRUCTORS_CHECK
 	Fraction A(2, 3,4);
 	Fraction B(3, 4,5);
-	Fraction C = A * B;
+	Fraction C = A + B;
 	C.print();
 
 	for (double i = .25; i < 10; i++)
