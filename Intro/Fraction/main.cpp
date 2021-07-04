@@ -135,7 +135,7 @@ public:
 		cout << endl;
 	}
 };
-
+// Арифметика
 Fraction operator*(Fraction left, Fraction right)
 {
 	left.to_improper();
@@ -156,7 +156,7 @@ Fraction operator*(Fraction left, Fraction right)
 
 	);
 }
-	Fraction operator+(Fraction left, Fraction right)
+Fraction operator+(Fraction left, Fraction right)
 	{
 		left.to_improper();
 		right.to_improper();
@@ -173,7 +173,7 @@ Fraction operator*(Fraction left, Fraction right)
 			left.get_denominator() * right.get_denominator()
 		);
 	}
-	Fraction operator-(Fraction left, Fraction right)
+Fraction operator-(Fraction left, Fraction right)
 	{
 		left.to_improper();
 		right.to_improper();
