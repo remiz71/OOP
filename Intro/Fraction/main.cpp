@@ -2,6 +2,9 @@
 using namespace std;
 #define tab "\t"
 
+class Fraction; //обьявление класса
+Fraction operator*(Fraction left, Fraction right);
+
 class Fraction
 {
 	int integer;      // Целое
@@ -41,7 +44,7 @@ public:
 		this->denominator = 1;
 		cout << "DefaultConstruct: " << this << endl;
 	}
-	Fraction(int integer)
+	explicit Fraction(int integer)
 	{
 		this->integer = integer;
 		this->numerator = 0;
@@ -83,6 +86,18 @@ public:
 		cout << "CopyAssigment: " << tab << this << endl;
 		return *this;
 	}
+	Fraction operator*=(const Fraction& other)
+	{
+		return *this = *this * other;
+	}
+	Fraction operator+=(const Fraction& other)
+	{
+		return *this = *this + other;
+	}
+	Fraction operator/=(const Fraction& other)
+	{
+		return *this = *this / other;
+	}
 
 	// increment/Decrement
 	Fraction& operator++() // Prefix increment
@@ -110,20 +125,37 @@ public:
 
 	}
 
+	// Type-cast operators:
+
+	operator int()
+	{
+		return integer;
+	}
+
 
 	//  methods
-	void to_improper()
+	Fraction& to_improper()
 	{
 		numerator += integer * denominator;
 		integer = 0;
+		return *this;
 	}
-	void to_proper()
+	Fraction& to_proper()
 		{
 		integer += numerator / denominator;
 		numerator %= denominator;
-		
+		return *this;
 		}
+	Fraction inverted()
+	{
+		to_improper();
+		/*int buffer = numerator;
+		numerator = denominator;
+		denominator = buffer;
+		return *this;*/
+		return Fraction(denominator, numerator);
 
+	}
 
 	void print()const
 	{
@@ -160,40 +192,45 @@ Fraction operator+(Fraction left, Fraction right)
 	{
 		left.to_improper();
 		right.to_improper();
-		if (left.get_denominator() == right.get_denominator())
-		return Fraction
-		(
-			left.get_numerator() + right.get_numerator(),
-			left.get_denominator()
-
-		);
 		return Fraction
 		(
 			(left.get_numerator() * right.get_denominator()) + (right.get_numerator() * left.get_denominator()),
 			left.get_denominator() * right.get_denominator()
-		);
+		).to_proper();
+		
 	}
 Fraction operator-(Fraction left, Fraction right)
 	{
 		left.to_improper();
 		right.to_improper();
-		if (left.get_denominator() == right.get_denominator())
-		return Fraction
-		(
-			left.get_numerator() - right.get_numerator(),
-			left.get_denominator()
-
-		);
 		return Fraction
 		(
 			(left.get_numerator() * right.get_denominator()) - (right.get_numerator() * left.get_denominator()),
 			left.get_denominator() * right.get_denominator()
+
 		);
-	}
+		
+}
+Fraction operator/(Fraction left, Fraction right)
+{
+	/*left.to_improper();
+	right.to_reverse();
+	return Fraction
+	(
+		left.get_numerator()*right.get_denominator(),
+		left.get_denominator()* right.get_numerator()
+	);*/
+	return left * right.inverted();
+}
 
 
 
 //#define CONSTRUCTORS_CHECK
+//#define INCREMENT_CHECK
+//#define ARIFMETICAL_OPERATORS_CHECK
+//#define OPTIMIZATION_CHECK
+//#define TYPE_CONVERSION
+#define TYPE_COVERSIONS_HOME_WORK
 
 void main()
 {
@@ -218,10 +255,19 @@ void main()
 	F.print();
 
 #endif // CONSTRUCTORS_CHECK
+#ifdef ARIFMETICAL_OPERATORS_CHECK
 	Fraction A(2, 3,4);
 	Fraction B(3, 4,5);
-	Fraction C = A + B;
+	Fraction C = A - B;
+	Fraction E = A + B;
+	Fraction D = A / B;
 	C.print();
+	D.print();
+	E.print();
+	(A + B).print();
+
+#endif // ARIFMETICAL_OPERATORS_CHECK
+#ifdef INCREMENT_CHECK
 
 	for (double i = .25; i < 10; i++)
 	{
@@ -238,6 +284,41 @@ void main()
 	A.print();
 	A.to_proper();
 	A.print();*/
+#endif // INCREMENT_CHECK
+#ifdef OPTIMIZATION_CHECK
+	Fraction A(2, 3, 4);
+	Fraction B(3, 4, 5);
+	A *= B;
+	A.print();
+
+#endif // OPTIMIZATION_CHECK
+#ifdef TYPE_COVERSION
+	//int a = 2;      //no conversint
+//double b = 3;   //from int to double
+//int c = 4.5;    //from double to int (possible loss of data)
+//int d = b;      //from double to int (no data loss)
+//double e = 5.3;
+//int f = a + e;
+
+	int a = 2;
+	Fraction A = (Fraction)5;
+	A.print();//From int to Fraction (forom less to more)
+	Fraction B;
+	B = (Fraction)3;
+	B.print();
+	int b = B;
+	cout << b << endl;
+#endif // TYPE_CONVERSION
+#ifdef TYPE_CONVERSION_HOME_WORK
+
+
+
+
+
+
+#endif // TYPE_CONVERSION_HOME_WORK
+
+
 
 
 
