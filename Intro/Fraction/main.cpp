@@ -4,6 +4,9 @@ using namespace std;
 
 class Fraction; //обьявление класса
 Fraction operator*(Fraction left, Fraction right);
+Fraction operator/(Fraction left, Fraction right);
+Fraction operator+(Fraction left, Fraction right);
+Fraction operator-(Fraction left, Fraction right);
 
 class Fraction
 {
@@ -90,13 +93,17 @@ public:
 	{
 		return *this = *this * other;
 	}
+	Fraction operator/=(const Fraction& other)
+	{
+		return *this = *this / other;
+	}
 	Fraction operator+=(const Fraction& other)
 	{
 		return *this = *this + other;
 	}
-	Fraction operator/=(const Fraction& other)
+	Fraction operator-=(const Fraction& other)
 	{
-		return *this = *this / other;
+		return *this = *this - other;
 	}
 
 	// increment/Decrement
@@ -126,6 +133,7 @@ public:
 	}
 
 	// Type-cast operators:
+
 
 	operator int()
 	{
@@ -207,8 +215,7 @@ Fraction operator-(Fraction left, Fraction right)
 		(
 			(left.get_numerator() * right.get_denominator()) - (right.get_numerator() * left.get_denominator()),
 			left.get_denominator() * right.get_denominator()
-
-		);
+		).to_proper();
 		
 }
 Fraction operator/(Fraction left, Fraction right)
@@ -222,13 +229,70 @@ Fraction operator/(Fraction left, Fraction right)
 	);*/
 	return left * right.inverted();
 }
-
+bool operator==(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	if (left.get_numerator() == right.get_numerator() &&
+		left.get_denominator() == right.get_denominator())
+		return true;
+	else return false;
+}
+bool operator>(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	Fraction temp = left * right.inverted();
+	if (temp.get_numerator() > temp.get_denominator())
+		return true;
+	else return false;
+}
+bool operator<(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	Fraction temp = left * right.inverted();
+	if (temp.get_numerator() < temp.get_denominator())
+		return true;
+	else return false;
+}
+bool operator<=(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	Fraction temp = left * right.inverted();
+	if (temp.get_numerator() < temp.get_denominator() || 
+		temp.get_numerator() == temp.get_denominator()
+		)
+		return true;
+	else return false;
+}
+bool operator>=(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	Fraction temp = left * right.inverted();
+	if (temp.get_numerator() > temp.get_denominator() ||
+		temp.get_numerator() == temp.get_denominator()
+		)
+		return true;
+	else return false;
+}
+bool operator!=(Fraction left, Fraction right)
+{
+	left.to_improper();
+	right.to_improper();
+	if (left.get_numerator() != right.get_numerator() &&
+		left.get_denominator() != right.get_denominator())
+		return true;
+	else return false;
+}
 
 
 //#define CONSTRUCTORS_CHECK
 //#define INCREMENT_CHECK
 //#define ARIFMETICAL_OPERATORS_CHECK
-//#define OPTIMIZATION_CHECK
+#define OPTIMIZATION_CHECK
 //#define TYPE_CONVERSION
 #define TYPE_COVERSIONS_HOME_WORK
 
@@ -260,7 +324,7 @@ void main()
 	Fraction B(3, 4,5);
 	Fraction C = A - B;
 	Fraction E = A + B;
-	Fraction D = A / B;
+	Fraction D 
 	C.print();
 	D.print();
 	E.print();
@@ -288,7 +352,8 @@ void main()
 #ifdef OPTIMIZATION_CHECK
 	Fraction A(2, 3, 4);
 	Fraction B(3, 4, 5);
-	A *= B;
+	if (A >= B) cout << "bolshe ";
+	else cout << " menshe  " ;
 	A.print();
 
 #endif // OPTIMIZATION_CHECK
