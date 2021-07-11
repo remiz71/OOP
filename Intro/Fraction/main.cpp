@@ -164,6 +164,16 @@ public:
 		return Fraction(denominator, numerator);
 
 	}
+	Fraction reduce()
+	{
+		if (denominator % numerator != 0)
+		{
+			int buf = denominator / numerator;
+			numerator /= numerator;
+			denominator = buf;
+		}
+		return Fraction(numerator, denominator);
+	}
 
 	void print()const
 	{
@@ -174,6 +184,8 @@ public:
 		if (integer == 0 && numerator == 0)cout << 0;
 		cout << endl;
 	}
+
+
 };
 // Арифметика
 Fraction operator*(Fraction left, Fraction right)
