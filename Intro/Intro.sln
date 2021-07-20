@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Point", "Point\Point.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fraction", "Fraction\Fraction.vcxproj", "{ABB1686C-7A69-41C9-925D-C0AD09450602}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String", "String\String.vcxproj", "{48DDC779-EE77-455A-A1F6-AA4CFC9AEAB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{ABB1686C-7A69-41C9-925D-C0AD09450602}.Release|x64.Build.0 = Release|x64
 		{ABB1686C-7A69-41C9-925D-C0AD09450602}.Release|x86.ActiveCfg = Release|Win32
 		{ABB1686C-7A69-41C9-925D-C0AD09450602}.Release|x86.Build.0 = Release|Win32
+		{48DDC779-EE77-455A-A1F6-AA4CFC9AEAB8}.Debug|x64.ActiveCfg = Debug|x64
+		{48DDC779-EE77-455A-A1F6-AA4CFC9AEAB8}.Debug|x64.Build.0 = Debug|x64
+		{48DDC779-EE77-455A-A1F6-AA4CFC9AEAB8}.Debug|x86.ActiveCfg = Debug|Win32
+		{48DDC779-EE77-455A-A1F6-AA4CFC9AEAB8}.Debug|x86.Build.0 = Debug|Win32
+		{48DDC779-EE77-455A-A1F6-AA4CFC9AEAB8}.Release|x64.ActiveCfg = Release|x64
+		{48DDC779-EE77-455A-A1F6-AA4CFC9AEAB8}.Release|x64.Build.0 = Release|x64
+		{48DDC779-EE77-455A-A1F6-AA4CFC9AEAB8}.Release|x86.ActiveCfg = Release|Win32
+		{48DDC779-EE77-455A-A1F6-AA4CFC9AEAB8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
