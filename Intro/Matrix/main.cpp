@@ -10,8 +10,8 @@ String operator+(const String& left, const String& right);
 class String
 {
 private:
-	unsigned int length; //Размер строки в байтах
-	char* str; // Указатель на строку в динамической памяти
+	unsigned int length; 
+	char* str; 
 public:
 	unsigned int get_length()const
 	{
@@ -25,17 +25,15 @@ public:
 	{
 		return str;
 	}
-	explicit String(unsigned int length=80)
+	explicit String(unsigned int length = 80)
 	{
 		this->length = length;
 		this->str = new char[length] {};
-		cout << "DefaultConst: " <<tab<<  this << endl;
+		cout << "DefaultConst: " << tab << this << endl;
 	}
 	String(const char* str)
 	{
-		/*while (str[length++]);*/
-		this->length = strlen(str) + 1; //this->length хранит размер в байтах
-										//а strlen() считает в символах
+		this->length = strlen(str) + 1; 
 		this->str = new char[length] {};
 		for (int i = 0; i < length; i++)this->str[i] = str[i];
 		cout << "1ArgConst:" << tab << this << endl;
@@ -49,24 +47,21 @@ public:
 	}
 	~String()
 	{
-		delete[] this->str; //[] - удаление массива
+		delete[] this->str; 
 		cout << "Destructor:\t" << this << endl;
 	}
 
 	//Operators:
-String& operator+=(const String& other)
-{
-	return *this = *this + other;
-}
+	String& operator+=(const String& other)
+	{
+		return *this = *this + other;
+	}
 
 	String& operator=(const String& other)
 	{
-		// 0. Проверяем , является ли принятый обьект - нашим
+		
 		if (this == &other)return *this;
-
-		// 1. Освобождаем память, занимаемую старым значением
 		delete[] this->str;
-		// 2. Выполняем deep copy
 		this->length = other.length;
 		this->str = new char[length] {};
 		for (int i = 0; i < length; i++)this->str[i] = other.str[i];
@@ -86,9 +81,9 @@ String& operator+=(const String& other)
 	void print()const
 	{
 		cout << "Size:" << tab << length << endl;
-		cout << "Str:" << tab << str <<endl;
+		cout << "Str:" << tab << str << endl;
 	}
-	
+
 
 };
 String operator+(const String& left, const String& right)
@@ -97,11 +92,10 @@ String operator+(const String& left, const String& right)
 	for (int i = 0; i < left.get_length(); i++)
 	{
 		cat[i] = left[i];
-		//cat.get_str()[i] = left.get_str()[i];
 	}
-	for (int i = 0;i<right.get_length(); i++)
+	for (int i = 0; i < right.get_length(); i++)
 	{
-		cat[i+left.get_length() - 1] = right[i];
+		cat[i + left.get_length() - 1] = right[i];
 	}
 	return cat;
 }
@@ -120,9 +114,8 @@ int main()
 	int b = 3;
 	a = b;
 
-	//String str = 5; //Implicit Conversion from int to String
-	String str(5);  // explicit constructor можно вызвать только так
-					// и нельзя вызвать =
+	
+	String str(5);  
 	str.print();
 	String str1 = "Hello";
 	str1 = str1;
@@ -143,13 +136,13 @@ int main()
 	cout << "\n------------------------\n" << endl;
 	String str3 = str1 + " " + str2;
 	cout << "\n------------------------\n" << endl;
-	cout << str1+str2 << endl;
+	cout << str1 + str2 << endl;
 	cout << "\n------------------------\n" << endl;
 	str1 += str2;
 	cout << "\n------------------------\n" << endl;
 
 
-	
-	
+
+
 
 }
