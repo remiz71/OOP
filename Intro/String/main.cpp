@@ -25,25 +25,17 @@ public:
 	{
 		return str;
 	}
-	explicit String(unsigned int length=80)
+	explicit String(unsigned int length=80):length(length),str(new char[length] {})
 	{
-		this->length = length;
-		this->str = new char[length] {};
 		cout << "DefaultConst: " <<tab<<  this << endl;
 	}
-	String(const char* str)
+	String(const char* str):length(strlen(str)+1),str(new char[length] {})
 	{
-		/*while (str[length++]);*/
-		this->length = strlen(str) + 1; //this->length хранит размер в байтах
-										//а strlen() считает в символах
-		this->str = new char[length] {};
 		for (int i = 0; i < length; i++)this->str[i] = str[i];
 		cout << "1ArgConst:" << tab << this << endl;
 	}
-	String(const String& other)
+	String(const String& other):length(other.length), str(new char[length] {})
 	{
-		this->length = other.length;
-		this->str = new char[length] {};
 		for (int i = 0; i < length; i++)this->str[i] = other.str[i];
 		cout << "CopyConstr:" << tab << this << endl;
 	}
