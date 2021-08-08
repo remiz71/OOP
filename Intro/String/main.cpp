@@ -1,3 +1,6 @@
+// Делегирование конструкторов
+//
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -29,14 +32,13 @@ public:
 	{
 		cout << "DefaultConst: " <<tab<<  this << endl;
 	}
-	String(const char* str):length(strlen(str)+1),str(new char[length] {})
+	String(const char* str):String(strlen(str)+1)
 	{
 		for (int i = 0; i < length; i++)this->str[i] = str[i];
 		cout << "1ArgConst:" << tab << this << endl;
 	}
-	String(const String& other):length(other.length), str(new char[length] {})
+	String(const String& other):String(other.str)
 	{
-		for (int i = 0; i < length; i++)this->str[i] = other.str[i];
 		cout << "CopyConstr:" << tab << this << endl;
 	}
 	~String()
